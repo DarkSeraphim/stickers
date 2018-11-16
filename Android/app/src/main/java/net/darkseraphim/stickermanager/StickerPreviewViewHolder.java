@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +19,6 @@ public class StickerPreviewViewHolder extends RecyclerView.ViewHolder {
 
     StickerPreviewViewHolder(final View itemView) {
         super(itemView);
-        stickerPreviewView = itemView.findViewById(R.id.sticker_preview);
+        stickerPreviewView = itemView.findViewById(net.darkseraphim.stickermanager.R.id.sticker_preview);
     }
 }

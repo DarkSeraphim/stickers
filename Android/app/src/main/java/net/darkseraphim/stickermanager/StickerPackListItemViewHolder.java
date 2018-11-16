@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,10 +26,10 @@ public class StickerPackListItemViewHolder extends RecyclerView.ViewHolder {
     StickerPackListItemViewHolder(final View itemView) {
         super(itemView);
         container = itemView;
-        titleView = itemView.findViewById(R.id.sticker_pack_title);
-        publisherView = itemView.findViewById(R.id.sticker_pack_publisher);
-        filesizeView = itemView.findViewById(R.id.sticker_pack_filesize);
-        addButton = itemView.findViewById(R.id.add_button_on_list);
-        imageRowView = itemView.findViewById(R.id.sticker_packs_list_item_image_list);
+        titleView = itemView.findViewById(net.darkseraphim.stickermanager.R.id.sticker_pack_title);
+        publisherView = itemView.findViewById(net.darkseraphim.stickermanager.R.id.sticker_pack_publisher);
+        filesizeView = itemView.findViewById(net.darkseraphim.stickermanager.R.id.sticker_pack_filesize);
+        addButton = itemView.findViewById(net.darkseraphim.stickermanager.R.id.add_button_on_list);
+        imageRowView = itemView.findViewById(net.darkseraphim.stickermanager.R.id.sticker_packs_list_item_image_list);
     }
 }

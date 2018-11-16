@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.content.Intent;
 import android.graphics.Rect;
@@ -31,39 +31,39 @@ public class StickerPackInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sticker_pack_info);
+        setContentView(net.darkseraphim.stickermanager.R.layout.activity_sticker_pack_info);
 
         final String trayIconUriString = getIntent().getStringExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_TRAY_ICON);
         final String website = getIntent().getStringExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_WEBSITE);
         final String email = getIntent().getStringExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_EMAIL);
         final String privacyPolicy = getIntent().getStringExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_PRIVACY_POLICY);
 
-        final TextView trayIcon = findViewById(R.id.tray_icon);
+        final TextView trayIcon = findViewById(net.darkseraphim.stickermanager.R.id.tray_icon);
         try {
             final InputStream inputStream = getContentResolver().openInputStream(Uri.parse(trayIconUriString));
             final BitmapDrawable trayDrawable = new BitmapDrawable(getResources(), inputStream);
-            final Drawable emailDrawable = getDrawableForAllAPIs(R.drawable.sticker_3rdparty_email);
+            final Drawable emailDrawable = getDrawableForAllAPIs(net.darkseraphim.stickermanager.R.drawable.sticker_3rdparty_email);
             trayDrawable.setBounds(new Rect(0, 0, emailDrawable.getIntrinsicWidth(), emailDrawable.getIntrinsicHeight()));
             trayIcon.setCompoundDrawables(trayDrawable, null, null, null);
         } catch (FileNotFoundException e) {
             Log.e(TAG, "could not find the uri for the tray image:" + trayIconUriString);
         }
 
-        final TextView viewWebpage = findViewById(R.id.view_webpage);
+        final TextView viewWebpage = findViewById(net.darkseraphim.stickermanager.R.id.view_webpage);
         if (TextUtils.isEmpty(website)) {
             viewWebpage.setVisibility(View.GONE);
         } else {
             viewWebpage.setOnClickListener(v -> launchWebpage(website));
         }
 
-        final TextView sendEmail = findViewById(R.id.send_email);
+        final TextView sendEmail = findViewById(net.darkseraphim.stickermanager.R.id.send_email);
         if (TextUtils.isEmpty(email)) {
             sendEmail.setVisibility(View.GONE);
         } else {
             sendEmail.setOnClickListener(v -> launchEmailClient(email));
         }
 
-        final TextView viewPrivacyPolicy = findViewById(R.id.privacy_policy);
+        final TextView viewPrivacyPolicy = findViewById(net.darkseraphim.stickermanager.R.id.privacy_policy);
         if (TextUtils.isEmpty(privacyPolicy)) {
             viewPrivacyPolicy.setVisibility(View.GONE);
         } else {
@@ -75,7 +75,7 @@ public class StickerPackInfoActivity extends BaseActivity {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", email, null));
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-        startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.info_send_email_to_prompt)));
+        startActivity(Intent.createChooser(emailIntent, getResources().getString(net.darkseraphim.stickermanager.R.string.info_send_email_to_prompt)));
     }
 
     private void launchWebpage(String website) {

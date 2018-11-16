@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,18 +22,18 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static com.example.samplestickerapp.StickerContentProvider.ANDROID_APP_DOWNLOAD_LINK_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.IOS_APP_DOWNLOAD_LINK_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.LICENSE_AGREENMENT_WEBSITE;
-import static com.example.samplestickerapp.StickerContentProvider.PRIVACY_POLICY_WEBSITE;
-import static com.example.samplestickerapp.StickerContentProvider.PUBLISHER_EMAIL;
-import static com.example.samplestickerapp.StickerContentProvider.PUBLISHER_WEBSITE;
-import static com.example.samplestickerapp.StickerContentProvider.STICKER_FILE_EMOJI_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.STICKER_FILE_NAME_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.STICKER_PACK_ICON_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.STICKER_PACK_IDENTIFIER_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.STICKER_PACK_NAME_IN_QUERY;
-import static com.example.samplestickerapp.StickerContentProvider.STICKER_PACK_PUBLISHER_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.ANDROID_APP_DOWNLOAD_LINK_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.IOS_APP_DOWNLOAD_LINK_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.LICENSE_AGREENMENT_WEBSITE;
+import static net.darkseraphim.stickermanager.StickerContentProvider.PRIVACY_POLICY_WEBSITE;
+import static net.darkseraphim.stickermanager.StickerContentProvider.PUBLISHER_EMAIL;
+import static net.darkseraphim.stickermanager.StickerContentProvider.PUBLISHER_WEBSITE;
+import static net.darkseraphim.stickermanager.StickerContentProvider.STICKER_FILE_EMOJI_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.STICKER_FILE_NAME_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.STICKER_PACK_ICON_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.STICKER_PACK_IDENTIFIER_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.STICKER_PACK_NAME_IN_QUERY;
+import static net.darkseraphim.stickermanager.StickerContentProvider.STICKER_PACK_PUBLISHER_IN_QUERY;
 
 public class StickerPackLoader {
 
@@ -55,9 +55,7 @@ public class StickerPackLoader {
                 identifierSet.add(stickerPack.identifier);
             }
         }
-        if (stickerPackList.isEmpty()) {
-            throw new IllegalStateException("There should be at least one sticker pack in the app");
-        }
+
         for (StickerPack stickerPack : stickerPackList) {
             final List<Sticker> stickers = getStickersForPack(context, stickerPack);
             stickerPack.setStickers(stickers);
@@ -89,6 +87,7 @@ public class StickerPackLoader {
     private static ArrayList<StickerPack> fetchFromContentProvider(Cursor cursor) {
         ArrayList<StickerPack> stickerPackList = new ArrayList<>();
         cursor.moveToFirst();
+        if (cursor.isAfterLast()) return stickerPackList;
         do {
             final String identifier = cursor.getString(cursor.getColumnIndexOrThrow(STICKER_PACK_IDENTIFIER_IN_QUERY));
             final String name = cursor.getString(cursor.getColumnIndexOrThrow(STICKER_PACK_NAME_IN_QUERY));

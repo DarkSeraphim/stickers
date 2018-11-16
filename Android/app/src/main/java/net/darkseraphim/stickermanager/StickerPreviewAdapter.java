@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -43,7 +43,7 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
     @NonNull
     @Override
     public StickerPreviewViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
-        View itemView = layoutInflater.inflate(R.layout.sticker_image, viewGroup, false);
+        View itemView = layoutInflater.inflate(net.darkseraphim.stickermanager.R.layout.sticker_image, viewGroup, false);
         StickerPreviewViewHolder vh = new StickerPreviewViewHolder(itemView);
 
         ViewGroup.LayoutParams layoutParams = vh.stickerPreviewView.getLayoutParams();

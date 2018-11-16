@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,8 +32,8 @@ public class StickerPackListActivity extends AddStickerPackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sticker_pack_list);
-        packRecyclerView = findViewById(R.id.sticker_pack_list);
+        setContentView(net.darkseraphim.stickermanager.R.layout.activity_sticker_pack_list);
+        packRecyclerView = findViewById(net.darkseraphim.stickermanager.R.id.sticker_pack_list);
         stickerPackList = getIntent().getParcelableArrayListExtra(EXTRA_STICKER_PACK_LIST_DATA);
         showStickerPackList(stickerPackList);
     }
@@ -73,7 +73,7 @@ public class StickerPackListActivity extends AddStickerPackActivity {
     };
 
     private void recalculateColumnCount() {
-        final int previewSize = getResources().getDimensionPixelSize(R.dimen.sticker_pack_list_item_preview_image_size);
+        final int previewSize = getResources().getDimensionPixelSize(net.darkseraphim.stickermanager.R.dimen.sticker_pack_list_item_preview_image_size);
         int firstVisibleItemPosition = packLayoutManager.findFirstVisibleItemPosition();
         StickerPackListItemViewHolder viewHolder = (StickerPackListItemViewHolder) packRecyclerView.findViewHolderForAdapterPosition(firstVisibleItemPosition);
         if (viewHolder != null) {

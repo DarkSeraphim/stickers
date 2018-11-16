@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -33,7 +33,7 @@ public abstract class AddStickerPackActivity extends BaseActivity {
         try {
             startActivityForResult(intent, ADD_PACK);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, R.string.error_adding_sticker_pack, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, net.darkseraphim.stickermanager.R.string.error_adding_sticker_pack, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class AddStickerPackActivity extends BaseActivity {
                     if (validationError != null) {
                         if (BuildConfig.DEBUG) {
                             //validation error should be shown to developer only, not users.
-                            MessageDialogFragment.newInstance(R.string.title_validation_error, validationError).show(getSupportFragmentManager(), "validation error");
+                            MessageDialogFragment.newInstance(net.darkseraphim.stickermanager.R.string.title_validation_error, validationError).show(getSupportFragmentManager(), "validation error");
                         }
                         Log.e("AddStickerPackActivity", "Validation failed:" + validationError);
                     }
@@ -63,10 +63,10 @@ public abstract class AddStickerPackActivity extends BaseActivity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.add_pack_fail_prompt_update_whatsapp)
+                    .setMessage(net.darkseraphim.stickermanager.R.string.add_pack_fail_prompt_update_whatsapp)
                     .setCancelable(true)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> dismiss())
-                    .setNeutralButton(R.string.add_pack_fail_prompt_update_play_link, (dialog, which) -> launchWhatsAppPlayStorePage());
+                    .setNeutralButton(net.darkseraphim.stickermanager.R.string.add_pack_fail_prompt_update_play_link, (dialog, which) -> launchWhatsAppPlayStorePage());
 
             return dialogBuilder.create();
         }
@@ -94,7 +94,7 @@ public abstract class AddStickerPackActivity extends BaseActivity {
             try {
                 startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                Toast.makeText(getActivity(), R.string.cannot_find_play_store, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), net.darkseraphim.stickermanager.R.string.cannot_find_play_store, Toast.LENGTH_LONG).show();
             }
         }
     }

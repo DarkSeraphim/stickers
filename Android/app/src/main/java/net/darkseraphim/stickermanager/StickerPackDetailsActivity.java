@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -54,24 +54,24 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sticker_pack_details);
+        setContentView(net.darkseraphim.stickermanager.R.layout.sticker_pack_details);
         boolean showUpButton = getIntent().getBooleanExtra(EXTRA_SHOW_UP_BUTTON, false);
         stickerPack = getIntent().getParcelableExtra(EXTRA_STICKER_PACK_DATA);
-        TextView packNameTextView = findViewById(R.id.pack_name);
-        TextView packPublisherTextView = findViewById(R.id.author);
-        ImageView packTrayIcon = findViewById(R.id.tray_image);
-        TextView packSizeTextView = findViewById(R.id.pack_size);
+        TextView packNameTextView = findViewById(net.darkseraphim.stickermanager.R.id.pack_name);
+        TextView packPublisherTextView = findViewById(net.darkseraphim.stickermanager.R.id.author);
+        ImageView packTrayIcon = findViewById(net.darkseraphim.stickermanager.R.id.tray_image);
+        TextView packSizeTextView = findViewById(net.darkseraphim.stickermanager.R.id.pack_size);
 
-        addButton = findViewById(R.id.add_to_whatsapp_button);
-        alreadyAddedText = findViewById(R.id.already_added_text);
+        addButton = findViewById(net.darkseraphim.stickermanager.R.id.add_to_whatsapp_button);
+        alreadyAddedText = findViewById(net.darkseraphim.stickermanager.R.id.already_added_text);
         layoutManager = new GridLayoutManager(this, 1);
-        recyclerView = findViewById(R.id.sticker_list);
+        recyclerView = findViewById(net.darkseraphim.stickermanager.R.id.sticker_list);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(pageLayoutListener);
         recyclerView.addOnScrollListener(dividerScrollListener);
-        divider = findViewById(R.id.divider);
+        divider = findViewById(net.darkseraphim.stickermanager.R.id.divider);
         if (stickerPreviewAdapter == null) {
-            stickerPreviewAdapter = new StickerPreviewAdapter(getLayoutInflater(), R.drawable.sticker_error, getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_size), getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_padding), stickerPack);
+            stickerPreviewAdapter = new StickerPreviewAdapter(getLayoutInflater(), net.darkseraphim.stickermanager.R.drawable.sticker_error, getResources().getDimensionPixelSize(net.darkseraphim.stickermanager.R.dimen.sticker_pack_details_image_size), getResources().getDimensionPixelSize(net.darkseraphim.stickermanager.R.dimen.sticker_pack_details_image_padding), stickerPack);
             recyclerView.setAdapter(stickerPreviewAdapter);
         }
         packNameTextView.setText(stickerPack.name);
@@ -81,7 +81,7 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
         addButton.setOnClickListener(v -> addStickerPackToWhatsApp(stickerPack.identifier, stickerPack.name));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(showUpButton);
-            getSupportActionBar().setTitle(showUpButton ? R.string.title_activity_sticker_pack_details_multiple_pack : R.string.title_activity_sticker_pack_details_single_pack);
+            getSupportActionBar().setTitle(showUpButton ? net.darkseraphim.stickermanager.R.string.title_activity_sticker_pack_details_multiple_pack : net.darkseraphim.stickermanager.R.string.title_activity_sticker_pack_details_single_pack);
         }
     }
 
@@ -97,13 +97,13 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar, menu);
+        getMenuInflater().inflate(net.darkseraphim.stickermanager.R.menu.toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_info && stickerPack != null) {
+        if (item.getItemId() == net.darkseraphim.stickermanager.R.id.action_info && stickerPack != null) {
             final String publisherWebsite = stickerPack.publisherWebsite;
             final String publisherEmail = stickerPack.publisherEmail;
             final String privacyPolicyWebsite = stickerPack.privacyPolicyWebsite;
@@ -119,7 +119,7 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     private final ViewTreeObserver.OnGlobalLayoutListener pageLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
         public void onGlobalLayout() {
-            setNumColumns(recyclerView.getWidth() / recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_size));
+            setNumColumns(recyclerView.getWidth() / recyclerView.getContext().getResources().getDimensionPixelSize(net.darkseraphim.stickermanager.R.dimen.sticker_pack_details_image_size));
         }
     };
 

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package net.darkseraphim.stickermanager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,7 +43,7 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
     public StickerPackListItemViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
         final Context context = viewGroup.getContext();
         final LayoutInflater layoutInflater = LayoutInflater.from(context);
-        final View stickerPackRow = layoutInflater.inflate(R.layout.sticker_packs_list_item, viewGroup, false);
+        final View stickerPackRow = layoutInflater.inflate(net.darkseraphim.stickermanager.R.layout.sticker_packs_list_item, viewGroup, false);
         return new StickerPackListItemViewHolder(stickerPackRow);
     }
 
@@ -65,10 +65,10 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
         //if this sticker pack contains less stickers than the max, then take the smaller size.
         int actualNumberOfStickersToShow = Math.min(maxNumberOfStickersInARow, pack.getStickers().size());
         for (int i = 0; i < actualNumberOfStickersToShow; i++) {
-            final SimpleDraweeView rowImage = (SimpleDraweeView) LayoutInflater.from(context).inflate(R.layout.sticker_pack_list_item_image, viewHolder.imageRowView, false);
+            final SimpleDraweeView rowImage = (SimpleDraweeView) LayoutInflater.from(context).inflate(net.darkseraphim.stickermanager.R.layout.sticker_pack_list_item_image, viewHolder.imageRowView, false);
             rowImage.setImageURI(StickerPackLoader.getStickerAssetUri(pack.identifier, pack.getStickers().get(i).imageFileName));
             final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) rowImage.getLayoutParams();
-            final int marginBetweenImages = (viewHolder.imageRowView.getMeasuredWidth() - maxNumberOfStickersInARow * viewHolder.imageRowView.getContext().getResources().getDimensionPixelSize(R.dimen.sticker_pack_list_item_preview_image_size)) / (maxNumberOfStickersInARow - 1) - lp.leftMargin - lp.rightMargin;
+            final int marginBetweenImages = (viewHolder.imageRowView.getMeasuredWidth() - maxNumberOfStickersInARow * viewHolder.imageRowView.getContext().getResources().getDimensionPixelSize(net.darkseraphim.stickermanager.R.dimen.sticker_pack_list_item_preview_image_size)) / (maxNumberOfStickersInARow - 1) - lp.leftMargin - lp.rightMargin;
             if (i != actualNumberOfStickersToShow - 1 && marginBetweenImages > 0) { //do not set the margin for the last image
                 lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin + marginBetweenImages, lp.bottomMargin);
                 rowImage.setLayoutParams(lp);
@@ -80,12 +80,12 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
 
     private void setAddButtonAppearance(ImageView addButton, StickerPack pack) {
         if (pack.getIsWhitelisted()) {
-            addButton.setImageResource(R.drawable.sticker_3rdparty_added);
+            addButton.setImageResource(net.darkseraphim.stickermanager.R.drawable.sticker_3rdparty_added);
             addButton.setClickable(false);
             addButton.setOnClickListener(null);
             setBackground(addButton, null);
         } else {
-            addButton.setImageResource(R.drawable.sticker_3rdparty_add);
+            addButton.setImageResource(net.darkseraphim.stickermanager.R.drawable.sticker_3rdparty_add);
             addButton.setOnClickListener(v -> onAddButtonClickedListener.onAddButtonClicked(pack));
             TypedValue outValue = new TypedValue();
             addButton.getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
